@@ -1,0 +1,27 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:postgres}
+    username: ${POSTGRES_USER:user}
+    password: ${POSTGRES_PASSWORD:1234}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: url_shortener
+        show_sql: true
+  sql:
+    init:
+      platform: postgres
+      schema-locations: classpath:init.sql
+      mode: always
+
+logging:
+  file:
+    name: logs/app.log
+
+baseUrl: http://localhost:${server.port}
