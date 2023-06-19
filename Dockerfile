@@ -2,6 +2,7 @@ FROM gradle:jdk11 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 
+RUN gradle wrapper --no-daemon
 RUN ./gradlew clean build -x test
 
 FROM adoptopenjdk:11-jdk-hotspot
